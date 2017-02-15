@@ -3,7 +3,7 @@ Version 9.14
 Input form 30, 30, 0, 0
 Caption "EnableLineImagesTest"
 Style  thickframe minimizebox maximizebox menunegotiation
-Background -1
+Background 14481663
 ToolbarStyle 0
 Begin
    font "Tahoma", 8, 0, 0, 0, 0, 34
