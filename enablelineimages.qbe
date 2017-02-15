@@ -87,7 +87,7 @@ Begin
 
    pushbutton 24, 25, 35, 12
    Name @Push18
-   Caption "manual"
+   Caption "FALSE"
    Font 0
    Style 34
    PushStyle 0
@@ -108,7 +108,40 @@ Begin
       imglist = CreateImageList(16, 15)
       AddImageListBitmap(imglist, "ImageList24.bmp" ,,qbeNamedColor.Fuchsia)
       @list.ImageList = imgList
-      '@list.EnableLineImages = False
+      @list.EnableLineImages = False
+      
+      item = AddLine(@list, "", "Stephen",   "Andrews",   "M", "19490821", "Sales") -1
+      item = AddLine(@list, "", "Elizabeth", "Koenig",    "F", "19560706", "Sales") - 1
+      @list.item(item, 4).ImageIndex = 10 
+      @list.item(item, 4).ShowButton = qbeButtonAppearance.Flat
+      item = AddLine(@list, "", "Clive",     "Morehead",  "M", "19360311", "Transport") - 1
+      item = AddLine(@list, "", "Katherine", "Fairchild", "F", "19301030", "Production") - 1
+   $End
+
+   pushbutton 66, 25, 35, 12
+   Name @Push1
+   Caption "TRUE"
+   Font 0
+   Style 34
+   PushStyle 0
+   PushCode 1125
+   $Begin Click
+      Dim imglist as integer
+      Dim item As Integer
+      
+      InitTableDescr(@list, 5)
+      DefineTableColumn(@list, 1, "Firstname",  qbeColumnType.String, 80,,43)
+      DefineTableColumn(@list, 2, "Lastname",   qbeColumnType.String, 80,,43)
+      DefineTableColumn(@list, 3, "Sex",        qbeColumnType.String, 10,,20)
+      DefineTableColumn(@list, 4, "Birthdate",  qbeColumnType.String, 20,,42)
+      DefineTableColumn(@list, 5, "Department", qbeColumnType.String, 30,,45)
+      TermTableDescr(@list)
+      @list.HeaderBkColor = qbeSystemColor.Control
+      
+      imglist = CreateImageList(16, 15)
+      AddImageListBitmap(imglist, "ImageList24.bmp" ,,qbeNamedColor.Fuchsia)
+      @list.ImageList = imgList
+      @list.EnableLineImages = True
       
       item = AddLine(@list, "", "Stephen",   "Andrews",   "M", "19490821", "Sales") -1
       item = AddLine(@list, "", "Elizabeth", "Koenig",    "F", "19560706", "Sales") - 1
