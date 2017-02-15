@@ -158,6 +158,7 @@ Begin
    HeaderClickAction 2
    Anchor 15
    ForeColor 0
+   BackgroundGradient 1,-2147483633,-2147483624,85,55,100,0,0
    Font 0
    Style 1901856
 
