@@ -1,0 +1,132 @@
+Version 9.14
+
+Input form 30, 30, 0, 0
+Caption "EnableLineImagesTest"
+Style  thickframe minimizebox maximizebox menunegotiation
+Background -1
+ToolbarStyle 0
+Begin
+   font "Tahoma", 8, 0, 0, 0, 0, 34
+
+   $Begin Declarations
+      
+      
+      Function ToQbeDate(ByVal d As String) As String
+         Dim df As String
+         Dim day As String
+         Dim month As String
+         Dim year As String
+      
+         df=GetQbeEnv("DateFormat")
+         year =  SubStr(d, 1, 4)
+         month =  SubStr(d, 5, 2)
+         day =  SubStr(d,  7, 2)
+         df = StrReplace(df, "YYYY", year)
+         df = StrReplace(df, "YY", Mod(CInt(year), 100))
+         df = StrReplace(df, "MM", month)
+         df = StrReplace(df, "DD", day)
+         Return df
+      End Function
+      
+      Sub InitializeListbox(ListBox As Control, Optional bStatic As Integer)
+      
+         ResetContents(ListBox)
+      
+      	If (bStatic) then
+            InitTableDescr(Listbox, 6, 1)
+      	Else
+            InitTableDescr(Listbox, 6, 0)
+      	End If
+      
+         DefineTableColumn(Listbox,  1, "Emp No", 0, 10,,30)
+         DefineTableColumn(Listbox,  2, "Firstname", 0, 30,,70)
+         DefineTableColumn(Listbox,  3, "Lastname", 0, 30,,70)
+         DefineTableColumn(Listbox,  4, "Sex", 0, 30,,20)
+         DefineTableColumn(Listbox,  5, "Birthdate", 0, 30,,45)
+         DefineTableColumn(Listbox,  6, "Department", 1, 10,,50)
+         TermTableDescr(Listbox)
+      
+         AddLine(ListBox, 1011, 1011,"Stephen","Andrews","M", ToQbeDate("19490821"), 6)
+         AddLine(ListBox, 1021,	1021,"Elizabeth","Koenig","F", ToQbeDate("19560706"), 1)
+         AddLine(ListBox, 1022,	1022,"Clive","Morehead","M", ToQbeDate("19360311"), 1)
+         AddLine(ListBox, 1413,	1413,"Katherine","Fairchild","F", ToQbeDate("19301030"), 2)
+         AddLine(ListBox, 1415,	1415,"Robert William","Spencer-Jones","M", ToQbeDate("19510103"), 3)
+         AddLine(ListBox, 1423,	1423,"Charles","Bryant","M", ToQbeDate("19630811"), 6)
+         AddLine(ListBox, 1568,	1567,"Morris","Cumson","M", ToQbeDate("19691231"), 6)
+         AddLine(ListBox, 1568,	1568,"Charles William","Neville","M", ToQbeDate("19380914"), 6)
+         AddLine(ListBox, 1573,	1573,"Nancy Ann","Carter","F", ToQbeDate("19450323"), 2)
+         AddLine(ListBox, 1588,	1588,"Gerald","Copeland","M", ToQbeDate("19620228"), 7)
+         AddLine(ListBox, 1591,	1591,"Evelyn","Pollack","F", ToQbeDate("19660517"), 2)
+         AddLine(ListBox, 1594,	1594,"Ruth Louise","Anderson","F", ToQbeDate("19540730"), 3)
+         AddLine(ListBox, 1601,	1601,"Norma Jane","Smith","F", ToQbeDate("19590311"), 2)
+         AddLine(ListBox, 1609,	1609,"Kate","Grindley","F", ToQbeDate("19390423"), 7)
+         AddLine(ListBox, 1610,	1610,"Donald","Zipf","M", ToQbeDate("19420509"), 5)
+         AddLine(ListBox, 1614,	1614,"Oliver Joseph","Ralston","M", ToQbeDate("19510226"), 5)
+         AddLine(ListBox, 1623,	1623,"Angela","Johnson","F", ToQbeDate("19590311"), 4)
+         AddLine(ListBox, 1625,	1625,"Christine Laura","Shannon","F", ToQbeDate("19580614"), 3)
+         AddLine(ListBox, 1641,	1641,"Moira","Streeter","F", ToQbeDate("19470912"), 4)
+         AddLine(ListBox, 1645,	1645,"Mary Ann","Sladek","F", ToQbeDate("19551127"), 5)
+         AddLine(ListBox, 1656,	1656,"Alex","Dimsdale","M", ToQbeDate("19560229"), 6)
+         AddLine(ListBox, 1657,	1657,"Derek","Smith","M", ToQbeDate("19601009"), 6)
+         AddLine(ListBox, 1662,	1662,"Ruth Evelyn","Anderson","F", ToQbeDate("19610823"), 5)
+         AddLine(ListBox, 1677,	1677,"Stephen","Feinstein","M", ToQbeDate("19571201"), 4)
+         AddLine(ListBox, 1678,	1678,"Mary Ann","Floyd","F", ToQbeDate("19690429"), 7)
+         AddLine(ListBox, 1692,	1692,"Shirley Marie","Smith","F", ToQbeDate("19660516"), 3)
+         AddLine(ListBox, 1695,	1695,"Howard","Moroney","M", ToQbeDate("19390211"), 7)
+         AddLine(ListBox, 1697,	1697,"Ronald","McCormack","M", ToQbeDate("19411001"), 5)
+         AddLine(ListBox, 1702,	1702,"Sylvia","Cooper","F", ToQbeDate("19590311"), 6)
+         AddLine(ListBox, 1706,	1706,"Harry","Wassermann","M", ToQbeDate("19541008"), 6)
+         AddLine(ListBox, 1707,	1707,"Henry","MacLeod","M", ToQbeDate("19560922"), 6)
+         AddLine(ListBox, 1723,	1723,"Geraldine","Smythe","F", ToQbeDate("19530319"), 3)
+         AddLine(ListBox, 1724,	1724,"Lawrence","Yarwood","M", ToQbeDate("19510628"), 6)
+         AddLine(ListBox, 1725,	1725,"Diana","MacFarland","F", ToQbeDate("19570902"), 6)
+         AddLine(ListBox, 1726,	1726,"David Henry","O'Hara","M", ToQbeDate("19550713"), 7)
+      
+      End Sub
+   $End
+
+   pushbutton 24, 25, 35, 12
+   Name @Push18
+   Caption "manual"
+   Font 0
+   Style 34
+   PushStyle 0
+   PushCode 1125
+   $Begin Click
+      Dim imglist as integer
+      Dim item As Integer
+      
+      InitTableDescr(@list, 5)
+      DefineTableColumn(@list, 1, "Firstname",  qbeColumnType.String, 80,,43)
+      DefineTableColumn(@list, 2, "Lastname",   qbeColumnType.String, 80,,43)
+      DefineTableColumn(@list, 3, "Sex",        qbeColumnType.String, 10,,20)
+      DefineTableColumn(@list, 4, "Birthdate",  qbeColumnType.String, 20,,42)
+      DefineTableColumn(@list, 5, "Department", qbeColumnType.String, 30,,45)
+      TermTableDescr(@list)
+      @list.HeaderBkColor = qbeSystemColor.Control
+      
+      imglist = CreateImageList(16, 15)
+      AddImageListBitmap(imglist, "ImageList24.bmp" ,,qbeNamedColor.Fuchsia)
+      @list.ImageList = imgList
+      '@list.EnableLineImages = False
+      
+      item = AddLine(@list, "", "Stephen",   "Andrews",   "M", "19490821", "Sales") -1
+      item = AddLine(@list, "", "Elizabeth", "Koenig",    "F", "19560706", "Sales") - 1
+      @list.item(item, 4).ImageIndex = 10 
+      @list.item(item, 4).ShowButton = qbeButtonAppearance.Flat
+      item = AddLine(@list, "", "Clive",     "Morehead",  "M", "19360311", "Transport") - 1
+      item = AddLine(@list, "", "Katherine", "Fairchild", "F", "19301030", "Production") - 1
+   $End
+
+   listview 21, 49, 347, 259
+   Name @list
+   ImageWidth 16
+   ImageHeight 15
+   HeaderClickAction 2
+   Anchor 15
+   ForeColor 0
+   Font 0
+   Style 1901856
+
+End
+;
